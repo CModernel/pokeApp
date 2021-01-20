@@ -1,18 +1,24 @@
 package com.pedrogomez.mylistaplication.booklist.di
 
+import android.app.Application
+import com.pedrogomez.mylistaplication.R
 import com.pedrogomez.mylistaplication.booklist.repository.BooksRepository
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
-import io.ktor.http.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonBuilder
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val networkModule = module {
     single { okHttpKtor }
-    single { BooksRepository(get()) }
+    single {
+
+        BooksRepository(
+            get(),
+            androidApplication().getString(R.string.url_api)
+        )
+    }
 }
 
 private val okHttpKtor = HttpClient(CIO) {
