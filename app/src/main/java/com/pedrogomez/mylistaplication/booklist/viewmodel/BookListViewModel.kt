@@ -2,86 +2,54 @@ package com.pedrogomez.mylistaplication.booklist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pedrogomez.mylistaplication.booklist.models.bookresponse.BooksResponse
-import com.pedrogomez.mylistaplication.booklist.repository.BooksRepository
+import com.pedrogomez.mylistaplication.booklist.models.pokelist.PokeListResponse
+import com.pedrogomez.mylistaplication.booklist.repository.PokemonsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import com.pedrogomez.mylistaplication.booklist.models.result.Result
-import com.pedrogomez.mylistaplication.utils.extensions.print
 
-class BookListViewModel(private val booksRepository: BooksRepository) : ViewModel() {
+class BookListViewModel(private val pokemonsRepository: PokemonsRepository) : ViewModel() {
 
     val scope : CoroutineScope = CoroutineScope(
         Dispatchers.IO
     )
 
-    private val booksLiveData = MutableLiveData<Result<BooksResponse>>()
+    private val pokeListLiveData = MutableLiveData<Result<PokeListResponse>>()
 
-    fun observeData() : MutableLiveData<Result<BooksResponse>> {
-        return booksLiveData
+    fun observeData() : MutableLiveData<Result<PokeListResponse>> {
+        return pokeListLiveData
     }
 
-    fun getNewBooks(
-        query : String
-    ){
-        "Query $query".print()
-        if(query.isNotEmpty()){
-            booksLiveData.postValue(
-                Result.LoadingNewContent(true)
-            )
-            getReposFromGitHub(
-                getStringAsQueryString(query),
-                0
-            )
-        }
+    fun findPokemon(name:String){
+
     }
 
-    fun loadMoreBooks(
-        query : String,
-        page:Int
-    ){
-        "Query $query".print()
-        if(query.isNotEmpty()){
-            booksLiveData.postValue(
-                Result.LoadingMoreContent(true)
-            )
-            getReposFromGitHub(
-                getStringAsQueryString(query),
-                page
-            )
-        }
-    }
-
-    private fun getReposFromGitHub(
-        query : String,
-        page:Int
-    ){
-        scope.launch {
-            booksRepository.getListOfBooks(
-                booksLiveData,
-                query,
-                page
-            )
-        }
-    }
-
-    private fun getStringAsQueryString(query:String):String{
-        val separatedQuery = query.trim().split(
-            Regex("([\\s])+")
+    fun getListOfPokemons(){
+        pokeListLiveData.postValue(
+            Result.LoadingNewContent(true)
         )
-        var finalQuery = ""
-        if(separatedQuery.size>1){
-            separatedQuery.forEach {
-                finalQuery += "$it+"
-            }
-            return finalQuery.dropLast(1)
+        getPokeListByPage(0)
+    }
+
+    fun loadMorePokemonsToList(
+            page:Int
+    ){
+        pokeListLiveData.postValue(
+            Result.LoadingMoreContent(true)
+        )
+        getPokeListByPage(page)
+    }
+
+    private fun getPokeListByPage(page:Int){
+        scope.launch {
+            pokeListLiveData.postValue(
+                pokemonsRepository.getPokeList(
+                    page
+                )
+            )
         }
-        if(separatedQuery.size==1){
-            return separatedQuery[0]
-        }
-        return finalQuery
     }
 
     override fun onCleared() {

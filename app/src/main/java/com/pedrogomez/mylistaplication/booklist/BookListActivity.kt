@@ -59,7 +59,7 @@ class BookListActivity : BaseActivity(),
                  * llamadas a backend
                  * */
                 override fun onFinish() {
-                    bookListViewModel.getNewBooks(
+                    bookListViewModel.getListOfPokemons(
                         it.toString()
                     )
                 }
@@ -75,7 +75,7 @@ class BookListActivity : BaseActivity(),
             layoutManager = LinearLayoutManager(this@BookListActivity)
         }
         binding.srlContainer.setOnRefreshListener {
-            bookListViewModel.getNewBooks(
+            bookListViewModel.getListOfPokemons(
                 binding.etSearchField.text.toString()
             )
         }
