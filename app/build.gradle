@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.pedrogomez.mylistaplication"
+        applicationId "com.pedrogomez.pokeapp"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
