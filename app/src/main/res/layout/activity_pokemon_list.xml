@@ -39,7 +39,7 @@
             <!--app:layout_constraintTop_toBottomOf="@id/etSearchField"-->
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvBookItems"
+                android:id="@+id/rvPokeItems"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
@@ -50,7 +50,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
-            android:id="@+id/pbBooksLoading"
+            android:id="@+id/pbPokesLoading"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

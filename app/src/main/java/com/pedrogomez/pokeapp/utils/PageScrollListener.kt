@@ -1,10 +1,10 @@
 package com.pedrogomez.pokeapp.utils
 
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class PageScrollListener(
-    private val mLinearLayoutManager: LinearLayoutManager?
+    private val gridLayoutManager: GridLayoutManager?
 ) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 1 // The total number of items in the dataset after the last load
@@ -19,9 +19,9 @@ abstract class PageScrollListener(
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         visibleItemCount = recyclerView.childCount
-        if (mLinearLayoutManager != null) {
-            totalItemCount = mLinearLayoutManager.itemCount
-            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition()
+        if (gridLayoutManager != null) {
+            totalItemCount = gridLayoutManager.itemCount
+            firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
         } else {
             totalItemCount = 0
             firstVisibleItem = 0
@@ -45,7 +45,7 @@ abstract class PageScrollListener(
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
-        val visiblePos = mLinearLayoutManager?.findFirstCompletelyVisibleItemPosition()?:0
+        val visiblePos = gridLayoutManager?.findFirstCompletelyVisibleItemPosition()?:0
         scrollIsOnTop(visiblePos<1)
     }
 

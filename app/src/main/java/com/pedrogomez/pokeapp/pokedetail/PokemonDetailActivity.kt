@@ -15,43 +15,43 @@ class PokemonDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPokemonDetailBinding
 
     companion object {
-        const val BOOK_DATA = "bookData"
+        const val POKE_DATA = "pokeData"
     }
 
-    private lateinit var bookData : PokemonData
+    private lateinit var pokemonData : PokemonData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPokemonDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         try{
-            bookData = intent.getSerializableExtra(BOOK_DATA) as BookItem
+            pokemonData = intent.getSerializableExtra(POKE_DATA) as PokemonData
             Glide.with(this)
                 .load(
-                    bookData.cover
+                    pokemonData.frontDefaultImg
                 ).into(
-                    binding?.ivBook!!
+                    binding?.ivPokemon!!
                 )
-            binding.tvTitle.text = bookData.title
-            binding.tvAuthor.text = bookData.authors
-            binding.tvDatePublication.text = bookData.datePublication
-            binding.tvDescription.text = bookData.description
+            binding.tvName.text = pokemonData.name
+            /*binding.tvAuthor.text = pokemonData.authors
+            binding.tvDatePublication.text = pokemonData.datePublication
+            binding.tvDescription.text = pokemonData.description
             binding.btnShowMore.setOnClickListener {
                 openOnBrowser(
-                    bookData.prevLink?:""
+                    pokemonData.prevLink?:""
                 )
             }
             binding.btnBuyThis.setOnClickListener {
                 openOnBrowser(
-                    bookData.buyLink?:""
+                    pokemonData.buyLink?:""
                 )
             }
-            if(bookData.prevLink==null){
+            if(pokemonData.prevLink==null){
                 binding.btnShowMore.remove()
             }
-            if(bookData.buyLink==null){
+            if(pokemonData.buyLink==null){
                 binding.btnBuyThis.remove()
-            }
+            }*/
         }catch (e: Exception){
             "bookData: error".print()
         }

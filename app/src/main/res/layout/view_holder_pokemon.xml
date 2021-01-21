@@ -3,108 +3,60 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bookRowContainer"
+    android:id="@+id/pokemonRowContainer"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="150dp"
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
     tools:cardBackgroundColor="@color/divider">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivBook"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/gdH30"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_pokeball" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gdH30"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".30"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gdV33"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".33"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gdV66"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".66"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivPokemon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/tvName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_dummy_poke" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvName"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Cien años de soledad"
+            android:text="Pikachu"
             android:textColor="@color/black_overlay"
             android:fontFamily="@font/montserrat_bold"
-            android:maxLines="2"
-            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:gravity="center"
             app:autoSizeMaxTextSize="16sp"
             app:autoSizeMinTextSize="12sp"
             app:autoSizeTextType="uniform"
             app:autoSizeStepGranularity="1sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gdH30"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/gdV33"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvAuthor"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Gabriel Garcia Marquez"
-            app:autoSizeMaxTextSize="14sp"
-            app:autoSizeMinTextSize="10sp"
-            app:autoSizeTextType="uniform"
-            app:autoSizeStepGranularity="1sp"
-            android:textColor="@color/black_overlay"
-            android:fontFamily="@font/montserrat_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gdH30"
-            app:layout_constraintTop_toBottomOf="@id/gdV33"
-            app:layout_constraintBottom_toTopOf="@id/gdV66"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvDatePublication"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="1967"
-            app:autoSizeMaxTextSize="12sp"
-            app:autoSizeMinTextSize="10sp"
-            app:autoSizeTextType="uniform"
-            app:autoSizeStepGranularity="1sp"
-            android:textColor="@color/black_overlay"
-            android:fontFamily="@font/montserrat_regular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/gdH30"
-            app:layout_constraintTop_toBottomOf="@id/gdV66"
+            app:layout_constraintTop_toBottomOf="@id/ivPokemon"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

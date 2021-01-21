@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="type_normal">#ccAAAA99</color>
+    <color name="type_fire">#ccFF4422</color>
+    <color name="type_water">#cc3399FF</color>
+    <color name="type_electric">#ccFFCC33</color>
+    <color name="type_grass">#cc77CC55</color>
+    <color name="type_ice">#cc66CCFF</color>
+    <color name="type_fighting">#ccBB5544</color>
+    <color name="type_poison">#ccAA5599</color>
+    <color name="type_ground">#ccDDBB55</color>
+    <color name="type_flying">#cc8899FF</color>
+    <color name="type_phychic">#ccFF5599</color>
+    <color name="type_bug">#ccAABB22</color>
+    <color name="type_rock">#ccBBAA66</color>
+    <color name="type_ghost">#cc6666BB</color>
+    <color name="type_dragon">#cc7766EE</color>
+    <color name="type_dark">#cc775544</color>
+    <color name="type_steel">#ccAAAABB</color>
+    <color name="type_fairy">#ccEE99EE</color>
+
+    <color name="type_normal_light">#ffAAAA99</color>
+    <color name="type_fire_light">#ffFF4422</color>
+    <color name="type_water_light">#ff3399FF</color>
+    <color name="type_electric_light">#ffFFCC33</color>
+    <color name="type_grass_light">#ff77CC55</color>
+    <color name="type_ice_light">#ff66CCFF</color>
+    <color name="type_fighting_light">#ffBB5544</color>
+    <color name="type_poison_light">#ffAA5599</color>
+    <color name="type_ground_light">#ffDDBB55</color>
+    <color name="type_flying_light">#ff8899FF</color>
+    <color name="type_phychic_light">#ffFF5599</color>
+    <color name="type_bug_light">#ffAABB22</color>
+    <color name="type_rock_light">#ffBBAA66</color>
+    <color name="type_ghost_light">#ff6666BB</color>
+    <color name="type_dragon_light">#ff7766EE</color>
+    <color name="type_dark_light">#ff775544</color>
+    <color name="type_steel_light">#ffAAAABB</color>
+    <color name="type_fairy_light">#ffEE99EE</color>
+</resources>

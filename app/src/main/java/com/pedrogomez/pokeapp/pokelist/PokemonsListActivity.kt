@@ -3,27 +3,30 @@ package com.pedrogomez.pokeapp.pokelist
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.pedrogomez.pokeapp.base.BaseActivity
 import com.pedrogomez.pokeapp.pokedetail.PokemonDetailActivity
-import com.pedrogomez.pokeapp.pokelist.adapter.BookViewHolder
-import com.pedrogomez.pokeapp.pokelist.adapter.BooksAdapter
+import com.pedrogomez.pokeapp.pokelist.adapter.PokemonViewHolder
+import com.pedrogomez.pokeapp.pokelist.adapter.PokemonsAdapter
 import com.pedrogomez.pokeapp.pokelist.models.result.Result
 import com.pedrogomez.pokeapp.pokelist.viewmodel.PokeListViewModel
 import com.pedrogomez.pokeapp.databinding.ActivityPokemonListBinding
 import com.pedrogomez.pokeapp.pokelist.models.PokemonData
 import com.pedrogomez.pokeapp.utils.PageScrollListener
+import com.pedrogomez.pokeapp.utils.extensions.remove
+import com.pedrogomez.pokeapp.utils.extensions.show
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PokemonsListActivity : BaseActivity(),
-    BookViewHolder.OnClickItemListener{
+    PokemonViewHolder.OnClickItemListener{
 
     private val pokeListViewModel : PokeListViewModel by viewModel()
 
     private lateinit var binding: ActivityPokemonListBinding
 
-    private lateinit var booksAdapter : BooksAdapter
+    private lateinit var pokemonsAdapter : PokemonsAdapter
 
     private var counter : CountDownTimer? = null
 
@@ -55,7 +58,7 @@ class PokemonsListActivity : BaseActivity(),
                  * llamadas a backend
                  * */
                 override fun onFinish() {
-                    pokeListViewModel.getListOfPokemons(
+                    pokeListViewModel.findPokemon(
                         it.toString()
                     )
                 }
@@ -65,24 +68,21 @@ class PokemonsListActivity : BaseActivity(),
     }
 
     private fun initRecyclerView() {
-        booksAdapter = BooksAdapter(this@PokemonsListActivity)
-        binding.rvBookItems.apply{
-            adapter = booksAdapter
-            layoutManager = LinearLayoutManager(this@PokemonsListActivity)
+        pokemonsAdapter = PokemonsAdapter(this@PokemonsListActivity)
+        binding.rvPokeItems.apply{
+            adapter = pokemonsAdapter
+            layoutManager = GridLayoutManager(this@PokemonsListActivity,3)
         }
         binding.srlContainer.setOnRefreshListener {
-            pokeListViewModel.getListOfPokemons(
-                binding.etSearchField.text.toString()
-            )
+            pokeListViewModel.getListOfPokemons()
         }
         pageScrollListener = object : PageScrollListener(
-            binding.rvBookItems.layoutManager as LinearLayoutManager
+            binding.rvPokeItems.layoutManager as GridLayoutManager
         ){
             override fun onLoadMore(
                 currentPage: Int
             ) {
-                pokeListViewModel.loadMoreBooks(
-                    binding.etSearchField.text.toString(),
+                pokeListViewModel.loadMorePokemonsToList(
                     currentPage
                 )
             }
@@ -95,11 +95,11 @@ class PokemonsListActivity : BaseActivity(),
                 }
             }
         }
-        binding.rvBookItems.addOnScrollListener(
+        binding.rvPokeItems.addOnScrollListener(
             pageScrollListener
         )
         binding.btnToTop.setOnClickListener {
-            binding.rvBookItems.smoothScrollToPosition(0)
+            binding.rvPokeItems.smoothScrollToPosition(0)
         }
     }
 
@@ -110,22 +110,22 @@ class PokemonsListActivity : BaseActivity(),
                 binding.srlContainer.isRefreshing = false
                 when (it) {
                     is Result.Success -> {
-                        binding.pbBooksLoading.remove()
-                        booksAdapter.setData(
+                        binding.pbPokesLoading.remove()
+                        pokemonsAdapter.setData(
                             it.data
                         )
                     }
                     is Result.LoadingNewContent -> {
                         pageScrollListener.initFields()
-                        booksAdapter.clearData()
+                        pokemonsAdapter.clearData()
                         hideKeyboard(binding.etSearchField)
-                        binding.pbBooksLoading.show()
+                        binding.pbPokesLoading.show()
                     }
                     is Result.LoadingMoreContent -> {
-                        binding.pbBooksLoading.show()
+                        binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
-                        binding.pbBooksLoading.remove()
+                        binding.pbPokesLoading.remove()
                     }
                 }
             }
@@ -138,7 +138,7 @@ class PokemonsListActivity : BaseActivity(),
             PokemonDetailActivity::class.java
         )
         intent.putExtra(
-            PokemonDetailActivity.BOOK_DATA,
+            PokemonDetailActivity.POKE_DATA,
             data
         )
         startActivity(

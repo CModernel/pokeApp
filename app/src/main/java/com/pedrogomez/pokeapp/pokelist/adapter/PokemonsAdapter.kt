@@ -6,27 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pedrogomez.pokeapp.pokelist.models.PokemonData
 import com.pedrogomez.pokeapp.utils.extensions.print
 
-class BooksAdapter(
-    private val onClickItemListener: BookViewHolder.OnClickItemListener
-) : RecyclerView.Adapter<BookViewHolder>() {
+class PokemonsAdapter(
+    private val onClickItemListener: PokemonViewHolder.OnClickItemListener
+) : RecyclerView.Adapter<PokemonViewHolder>() {
 
     private var items: ArrayList<PokemonData> = ArrayList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BookViewHolder {
+    ): PokemonViewHolder {
         val inflater = LayoutInflater.from(
             parent.context
         )
-        return BookViewHolder(
+        return PokemonViewHolder(
             inflater,
             parent
         )
     }
 
     override fun onBindViewHolder(
-        holder: BookViewHolder,
+        holder: PokemonViewHolder,
         position: Int
     ) {
         holder.setData(
