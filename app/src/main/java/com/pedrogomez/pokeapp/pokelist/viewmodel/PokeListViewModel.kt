@@ -18,10 +18,22 @@ class PokeListViewModel(
         Dispatchers.IO
     )
 
-    private val pokeListLiveData = MutableLiveData<Result<List<PokemonData>>>()
+    private val pokemonLiveData = MutableLiveData<ArrayList<PokemonData>>()
 
-    fun observeData() : MutableLiveData<Result<List<PokemonData>>> {
-        return pokeListLiveData
+    private val pokeStateApi = MutableLiveData<Result>()
+
+    private val pokemonList = ArrayList<PokemonData>()
+
+    init {
+        pokemonLiveData.postValue(pokemonList)
+    }
+
+    fun observeApiState() : MutableLiveData<Result> {
+        return pokeStateApi
+    }
+
+    fun observePokemonData() : MutableLiveData<ArrayList<PokemonData>> {
+        return pokemonLiveData
     }
 
     fun findPokemon(name:String){
@@ -29,7 +41,8 @@ class PokeListViewModel(
     }
 
     fun getListOfPokemons(){
-        pokeListLiveData.postValue(
+        pokemonList.clear()
+        pokeStateApi.postValue(
             Result.LoadingNewContent(true)
         )
         getPokeListByPage(0)
@@ -38,7 +51,7 @@ class PokeListViewModel(
     fun loadMorePokemonsToList(
             page:Int
     ){
-        pokeListLiveData.postValue(
+        pokeStateApi.postValue(
             Result.LoadingMoreContent(true)
         )
         getPokeListByPage(page)
@@ -46,9 +59,19 @@ class PokeListViewModel(
 
     private fun getPokeListByPage(page:Int){
         scope.launch {
-            pokeListLiveData.postValue(
+            pokeStateApi.postValue(
                 pokemonsRepository.getPokeList(
-                    page
+                    page,
+                    //para hacer andar esto necesito eliminar el actual modo de observar la data.
+                    // Debo usar un observador para los estados del app y otro para la data
+                    object : PokemonsRepository.OnFetching{
+                        override fun recibeNewState(newPoke: PokemonData) {
+                            pokemonList.add(newPoke)
+                            pokemonLiveData.postValue(
+                                    pokemonList
+                            )
+                        }
+                    }
                 )
             )
         }

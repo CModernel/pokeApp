@@ -39,9 +39,10 @@ class PokemonsAdapter(
 
     fun setData(newItems: List<PokemonData>?) {
         newItems?.let {
+            items.clear()
             items.addAll(it)
             "size in adapter ${items.size}".print()
-            notifyItemInserted(newItems.size)
+            notifyItemInserted(items.size)
         }
     }
 

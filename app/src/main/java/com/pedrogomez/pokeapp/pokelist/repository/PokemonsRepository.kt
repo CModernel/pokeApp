@@ -22,8 +22,9 @@ class PokemonsRepository(
      * @param name {pokemon's name to find}
      */
     suspend fun getPokeDetailsByName(
-        name : String
-    ):Result<List<PokemonData>>{
+        name : String,
+        listener:OnFetching
+    ):Result{
         return try{
             val requestUrl = "$urlBase/$name"
             val response = client.request<PokeDetailResponse>(requestUrl) {
@@ -36,9 +37,7 @@ class PokemonsRepository(
                 )
             )
             "Ktor_request getPokeDetailsByName: $response".print()
-            Result.Success(
-                pokeListData.toList()
-            )
+            Result.Success(true)
         }catch (e : java.lang.Exception){
             if (e.message.isValid()) {
                 Result.Error.RecoverableError(Exception(e.message))
@@ -72,7 +71,14 @@ class PokemonsRepository(
      */
     suspend fun getPokeList(
         page:Int
-    ):Result<List<PokemonData>>{
+    ):Result{
+        return getPokeList(page,null)
+    }
+
+    suspend fun getPokeList(
+            page:Int,
+            listener:OnFetching?
+    ):Result{
         return try{
             val requestUrl ="$urlBase?limit=21&offset=${page*21}"
             "Ktor_request url: $requestUrl".print()
@@ -80,20 +86,17 @@ class PokemonsRepository(
                 method = HttpMethod.Get
             }
             //"Ktor_request getPokeList: $response".print()
-            val pokeListData = ArrayList<PokemonData>()
             response.results.map {
                 val pokemonData = getPokeDetailsByUrl(it.url)
                 if(pokemonData!=null){
-                    pokeListData.add(
+                    listener?.recibeNewState(
                         pokeDataAdapter.getAsPokemonData(
                             pokemonData
                         )
                     )
                 }
             }
-            Result.Success(
-                pokeListData.toList()
-            )
+            Result.Success(true)
         }catch (e : java.lang.Exception){
             "Ktor_request getPokeList: ${e.message}".print()
             if (e.message.isValid()) {
@@ -106,6 +109,10 @@ class PokemonsRepository(
                 )
             }
         }
+    }
+
+    interface OnFetching{
+        fun recibeNewState(newPoke: PokemonData)
     }
 
 }

@@ -16,6 +16,7 @@ import com.pedrogomez.pokeapp.pokelist.viewmodel.PokeListViewModel
 import com.pedrogomez.pokeapp.databinding.ActivityPokemonListBinding
 import com.pedrogomez.pokeapp.pokelist.models.PokemonData
 import com.pedrogomez.pokeapp.utils.PageScrollListener
+import com.pedrogomez.pokeapp.utils.extensions.print
 import com.pedrogomez.pokeapp.utils.extensions.remove
 import com.pedrogomez.pokeapp.utils.extensions.show
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -84,6 +85,7 @@ class PokemonsListActivity : BaseActivity(),
             override fun onLoadMore(
                 currentPage: Int
             ) {
+                "current page: $currentPage".print()
                 pokeListViewModel.loadMorePokemonsToList(
                     currentPage
                 )
@@ -106,32 +108,42 @@ class PokemonsListActivity : BaseActivity(),
     }
 
     private fun initObservers(){
-        pokeListViewModel.observeData().observe(
+        pokeListViewModel.observeApiState().observe(
             this,
             Observer {
                 binding.srlContainer.isRefreshing = false
                 when (it) {
                     is Result.Success -> {
-                        binding.pbPokesLoading.remove()
-                        pokemonsAdapter.setData(
-                            it.data
-                        )
+                        //binding.pbPokesLoading.remove()
+                        binding.srlContainer.isEnabled = true
+                        pageScrollListener.enablePaging(true)
                     }
                     is Result.LoadingNewContent -> {
+                        binding.srlContainer.isEnabled = false
                         pageScrollListener.initFields()
                         pokemonsAdapter.clearData()
                         hideKeyboard(binding.etSearchField)
-                        binding.pbPokesLoading.show()
+                        //binding.pbPokesLoading.show()
                     }
                     is Result.LoadingMoreContent -> {
-                        binding.pbPokesLoading.show()
+                        binding.srlContainer.isEnabled = false
+                        pageScrollListener.enablePaging(false)
+                        //binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
                         Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
-                        binding.pbPokesLoading.remove()
+                        //binding.pbPokesLoading.remove()
+                        binding.srlContainer.isEnabled = true
+                        pageScrollListener.enablePaging(true)
                     }
                 }
             }
+        )
+        pokeListViewModel.observePokemonData().observe(
+                this,
+                Observer {
+                    pokemonsAdapter.setData(it.toList())
+                }
         )
     }
 
