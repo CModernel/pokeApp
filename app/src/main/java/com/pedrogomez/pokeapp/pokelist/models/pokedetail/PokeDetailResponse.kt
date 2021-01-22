@@ -9,10 +9,10 @@ data class PokeDetailResponse(
     val height: Int? = null,
     val id: Int? = null,
     val is_default: Boolean? = null,
-    val name: String? = null,
+    val name: String,
     val order: Int? = null,
-    val sprites: Sprites? = null,
-    val stats: List<Stat>? = null,
-    val types: List<Type>? = null,
+    val sprites: Sprites,
+    val stats: List<Stat>,
+    val types: List<Type>,
     val weight: Int? = null
 )
