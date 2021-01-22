@@ -21,7 +21,7 @@ enum class PokeType(val type:String) {
     FAIRY("FAIRY");
 
     companion object {
-        fun valueOf(value: String): PokeType? = values().find { it.type.toLowerCase() == value }
+        fun getAsPokeType(value: String): PokeType? = PokeType.values().find { it.type.toLowerCase() == value }
     }
 }
 

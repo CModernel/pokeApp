@@ -29,7 +29,7 @@ class PokemonDataAdapter {
         val pokemonDataList = ArrayList<PokemonData>()
         pokeList.map {
             pokemonDataList.add(
-                getAsPokemonData(it.pokeDetail)
+                it.pokeDetail?.let { it1 -> getAsPokemonData(it1) }?: PokemonData()
             )
         }
         return pokemonDataList.toList()
@@ -47,7 +47,7 @@ class PokemonDataAdapter {
     private fun getAsPokeType(
         type: Type
     ): PokeType {
-        return PokeType.valueOf(type.type?.name?:"normal")
+        return PokeType.getAsPokeType(type.type?.name?:"normal")?:PokeType.NORMAL
         /*return when(type.type?.name?.toUpperCase()){
             PokeType.NORMAL.type -> PokeType.NORMAL
             PokeType.FIRE.type -> PokeType.FIRE

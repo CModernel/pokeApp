@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MyListAplication</string>
+    <string name="app_name">My Poke App</string>
     <string name="search_hint">escriba el titulo o autor de la obra</string>
 </resources>

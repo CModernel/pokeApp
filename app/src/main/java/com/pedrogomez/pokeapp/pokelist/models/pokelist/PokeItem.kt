@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class PokeItem(
     val name: String,
     val url: String,
-    var pokeDetail:PokeDetailResponse
+    var pokeDetail:PokeDetailResponse? = null
 )

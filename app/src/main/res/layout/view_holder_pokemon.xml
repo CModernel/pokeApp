@@ -17,27 +17,28 @@
         android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBall"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/ic_pokeball" />
+            app:srcCompat="@drawable/ic_pokeball" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPokemon"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/ic_dummy_poke" />
+            app:srcCompat="@drawable/ic_dummy_poke" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvName"

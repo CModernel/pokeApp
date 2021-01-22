@@ -3,6 +3,7 @@ package com.pedrogomez.pokeapp.pokelist
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,6 +42,7 @@ class PokemonsListActivity : BaseActivity(),
         initEditTextListeners()
         binding.btnToTop.hide()
         hideKeyboard(binding.etSearchField)
+        pokeListViewModel.getListOfPokemons()
     }
 
     private fun initEditTextListeners() {
@@ -125,6 +127,7 @@ class PokemonsListActivity : BaseActivity(),
                         binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
+                        Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
                         binding.pbPokesLoading.remove()
                     }
                 }
