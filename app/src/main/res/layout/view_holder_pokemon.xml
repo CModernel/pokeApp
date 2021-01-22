@@ -5,15 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pokemonRowContainer"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="170dp"
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
-    tools:cardBackgroundColor="@color/divider">
+    app:cardBackgroundColor="@color/white_gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBgCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -22,6 +23,9 @@
             android:layout_height="120dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,10 +38,10 @@
             android:layout_height="70dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@id/tvName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/ivBall"
+            app:layout_constraintStart_toStartOf="@id/ivBall"
+            app:layout_constraintTop_toTopOf="@id/ivBall"
+            app:layout_constraintEnd_toEndOf="@id/ivBall"
             app:srcCompat="@drawable/ic_dummy_poke" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -57,7 +61,7 @@
             app:autoSizeStepGranularity="1sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivPokemon"
+            app:layout_constraintTop_toBottomOf="@id/ivBall"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
