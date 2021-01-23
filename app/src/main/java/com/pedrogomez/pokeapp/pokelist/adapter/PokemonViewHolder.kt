@@ -45,7 +45,9 @@ class PokemonViewHolder(
         }
         binding?.tvName?.text = data.name
         binding?.clBgCard?.background = context.getDrawable(
-            getDrawableResByType(data.type)
+            getDrawableResByType(
+                    data.type?.get(0)?:PokeType.NORMAL
+            )
         )
         binding?.pokemonRowContainer?.setOnClickListener {
             onClickItemListener.goToBookDetail(

@@ -37,7 +37,6 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@id/ivBall"
             app:layout_constraintStart_toStartOf="@id/ivBall"
             app:layout_constraintTop_toTopOf="@id/ivBall"

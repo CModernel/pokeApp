@@ -12,16 +12,19 @@ class PokemonDataAdapter {
 
     fun getAsPokemonData(item: PokeDetailResponse): PokemonData {
         return PokemonData(
-            item.name?:"",
+            item.id?:0,
+            item.name,
             item.height?:0,
+            item.weight?:0,
             item.sprites.back_default?:"",
             item.sprites.front_default?:"",
+            getStatByTag(PokeStat.HP,item.stats),
             getStatByTag(PokeStat.ATTACK,item.stats),
             getStatByTag(PokeStat.DEFENSE,item.stats),
             getStatByTag(PokeStat.SPECIAL_ATTACK,item.stats),
             getStatByTag(PokeStat.SPECIAL_DEFENSE,item.stats),
             getStatByTag(PokeStat.SPEED,item.stats),
-            getAsPokeType(item.types[0])
+            getAsPokeTypeList(item.types)
         )
     }
 
@@ -44,30 +47,22 @@ class PokemonDataAdapter {
         }[0].base_stat
     }
 
+    private fun getAsPokeTypeList(types:List<Type>):List<PokeType>{
+        val pokeTypeList = ArrayList<PokeType>()
+        types.map {
+            pokeTypeList.add(
+                    getAsPokeType(it)
+            )
+        }
+        return pokeTypeList.toList()
+    }
+
     private fun getAsPokeType(
         type: Type
     ): PokeType {
-        return PokeType.getAsPokeType(type.type?.name?:"normal")?:PokeType.NORMAL
-        /*return when(type.type?.name?.toUpperCase()){
-            PokeType.NORMAL.type -> PokeType.NORMAL
-            PokeType.FIRE.type -> PokeType.FIRE
-            PokeType.WATER.type -> PokeType.WATER
-            PokeType.ELECTRIC.type -> PokeType.ELECTRIC
-            PokeType.GRASS.type -> PokeType.GRASS
-            PokeType.ICE.type -> PokeType.ICE
-            PokeType.FIGHTING.type -> PokeType.FIGHTING
-            PokeType.POISON.type -> PokeType.POISON
-            PokeType.GROUND.type -> PokeType.GROUND
-            PokeType.PHYCHIC.type -> PokeType.PHYCHIC
-            PokeType.BUG.type -> PokeType.BUG
-            PokeType.ROCK.type -> PokeType.ROCK
-            PokeType.GHOST.type -> PokeType.GHOST
-            PokeType.DRAGON.type -> PokeType.DRAGON
-            PokeType.DARK.type -> PokeType.DARK
-            PokeType.STEEL.type -> PokeType.STEEL
-            PokeType.FAIRY.type -> PokeType.FAIRY
-            else -> PokeType.NORMAL
-        }*/
+        return PokeType.getAsPokeType(
+                type.type?.name?:"normal"
+        )?:PokeType.NORMAL
     }
 
 }

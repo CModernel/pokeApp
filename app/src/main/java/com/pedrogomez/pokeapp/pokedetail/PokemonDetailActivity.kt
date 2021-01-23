@@ -30,28 +30,24 @@ class PokemonDetailActivity : AppCompatActivity() {
                 .load(
                     pokemonData.frontDefaultImg
                 ).into(
-                    binding?.ivPokemon!!
+                    binding?.ivPokemonFront!!
                 )
+            Glide.with(this)
+                    .load(
+                            pokemonData.backDefaultImg
+                    ).into(
+                            binding?.ivPokemonBack!!
+                    )
             binding.tvName.text = pokemonData.name
-            /*binding.tvAuthor.text = pokemonData.authors
-            binding.tvDatePublication.text = pokemonData.datePublication
-            binding.tvDescription.text = pokemonData.description
-            binding.btnShowMore.setOnClickListener {
-                openOnBrowser(
-                    pokemonData.prevLink?:""
-                )
-            }
-            binding.btnBuyThis.setOnClickListener {
-                openOnBrowser(
-                    pokemonData.buyLink?:""
-                )
-            }
-            if(pokemonData.prevLink==null){
-                binding.btnShowMore.remove()
-            }
-            if(pokemonData.buyLink==null){
-                binding.btnBuyThis.remove()
-            }*/
+            binding.tvHeight.text = "${pokemonData.height} m"
+            binding.tvWeight.text = "${pokemonData.weight} kg"
+            binding.tvId.text = "#${pokemonData.id}"
+            binding.tsfHp.setValue(pokemonData.hp?:0)
+            binding.tsfAtk.setValue(pokemonData.attack?:0)
+            binding.tsfDef.setValue(pokemonData.defense?:0)
+            binding.tsfSpd.setValue(pokemonData.speed?:0)
+            binding.tsfSpAtk.setValue(pokemonData.specialAttack?:0)
+            binding.tsfSpDef.setValue(pokemonData.specialDefense?:0)
         }catch (e: Exception){
             "bookData: error".print()
         }

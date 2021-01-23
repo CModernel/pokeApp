@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="TitledStatusField">
+        <attr name="tsfTitle" format="string" />
+    </declare-styleable>
+</resources>
