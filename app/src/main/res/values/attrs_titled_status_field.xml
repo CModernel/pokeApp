@@ -1,5 +1,7 @@
 <resources>
     <declare-styleable name="TitledStatusField">
         <attr name="tsfTitle" format="string" />
+        <attr name="tsfColorTitle" format="color" />
+        <attr name="tsfColorValue" format="color" />
     </declare-styleable>
 </resources>

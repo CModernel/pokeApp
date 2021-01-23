@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">My Poke App</string>
     <string name="search_hint">escriba el titulo o autor de la obra</string>
-    <string name="tipos">Tipos:</string>
-    <string name="stats">Stats:</string>
     <string name="stat_hp">HP</string>
     <string name="stat_atk">ATK</string>
     <string name="stat_def">DEF</string>
     <string name="stat_spd">SPD</string>
     <string name="stat_sp_atk">SpATK</string>
     <string name="stat_sp_def">SpDEF</string>
+    <string name="title_stats">Stats</string>
+    <string name="title_types">Tipos</string>
 </resources>

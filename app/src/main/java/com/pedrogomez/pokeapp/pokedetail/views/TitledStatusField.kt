@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.databinding.TitledStatusFieldBinding
+import com.pedrogomez.pokeapp.utils.extensions.getColor
 
 class TitledStatusField : ConstraintLayout {
 
@@ -40,14 +41,27 @@ class TitledStatusField : ConstraintLayout {
             R.styleable.TitledStatusField_tsfTitle
         )
 
+        val titleColor = a.getColor(
+            R.styleable.TitledStatusField_tsfColorTitle,
+            getColor(R.color.black)
+        )
+
+        val valueColor = a.getColor(
+            R.styleable.TitledStatusField_tsfColorValue,
+            getColor(R.color.black)
+        )
+
         binding.tvTitleStatus.text = titleStatus?:""
+
+        binding.tvTitleStatus.setTextColor(titleColor)
+        binding.tvValueStatus.setTextColor(valueColor)
 
         a.recycle()
 
     }
 
     fun setValue(value:Int){
-        binding.tvIValueStatus.text = "$value"
+        binding.tvValueStatus.text = "$value"
     }
 
 }

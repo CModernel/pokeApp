@@ -125,22 +125,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
             android:id="@+id/tvTitleTypes"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:gravity="center_vertical"
-            android:textSize="18sp"
-            android:text="@string/tipos"
-            android:textColor="@color/black"
-            app:autoSizeMaxTextSize="15sp"
-            app:autoSizeMinTextSize="12sp"
-            app:autoSizeStepGranularity="1sp"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/ivPokemonBack"
-            app:layout_constraintStart_toEndOf="@id/gdV75"
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -148,78 +138,70 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tvTitleTypes"
-            app:layout_constraintStart_toEndOf="@id/gdV75"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_types" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
             android:id="@+id/tvTitleStats"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:gravity="center_vertical"
-            android:textSize="18sp"
-            android:text="@string/stats"
-            android:textColor="@color/black"
-            app:autoSizeMaxTextSize="15sp"
-            app:autoSizeMinTextSize="12sp"
-            app:autoSizeStepGranularity="1sp"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/rvTypes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tsTitle="@string/title_stats" />
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfHp"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tvTitleStats"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_hp"/>
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfAtk"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tsfHp"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_atk"/>
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfDef"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tsfAtk"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_def"/>
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfSpd"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tsfDef"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_spd"/>
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfSpAtk"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tsfSpd"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_sp_atk"/>
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitledStatusField
             android:id="@+id/tsfSpDef"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Theme.MyListAplication.TitledStatusField"
             app:layout_constraintTop_toBottomOf="@id/tsfSpAtk"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsfTitle="@string/stat_sp_def"/>
 

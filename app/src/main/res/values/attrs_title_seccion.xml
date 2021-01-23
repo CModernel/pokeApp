@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="TitleSeccion">
+        <attr name="tsColorTitle" format="color" />
+        <attr name="tsTitle" format="string" />
+    </declare-styleable>
+</resources>
