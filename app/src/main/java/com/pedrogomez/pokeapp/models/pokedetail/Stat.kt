@@ -1,4 +1,4 @@
-package com.pedrogomez.pokeapp.pokelist.models.pokedetail
+package com.pedrogomez.pokeapp.models.pokedetail
 
 import kotlinx.serialization.Serializable
 

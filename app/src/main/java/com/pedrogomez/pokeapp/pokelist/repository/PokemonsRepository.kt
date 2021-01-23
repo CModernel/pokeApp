@@ -1,15 +1,15 @@
 package com.pedrogomez.pokeapp.pokelist.repository
 
 
-import com.pedrogomez.pokeapp.pokelist.models.PokemonData
-import com.pedrogomez.pokeapp.pokelist.models.adapters.PokemonDataAdapter
+import com.pedrogomez.pokeapp.models.PokemonData
+import com.pedrogomez.pokeapp.models.dataadapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.utils.extensions.isValid
-import com.pedrogomez.pokeapp.pokelist.models.pokedetail.PokeDetailResponse
-import com.pedrogomez.pokeapp.pokelist.models.pokelist.PokeListResponse
+import com.pedrogomez.pokeapp.models.pokedetail.PokeDetailResponse
+import com.pedrogomez.pokeapp.models.pokelist.PokeListResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import com.pedrogomez.pokeapp.pokelist.models.result.Result
+import com.pedrogomez.pokeapp.models.result.Result
 import com.pedrogomez.pokeapp.utils.extensions.print
 
 class PokemonsRepository(

@@ -9,16 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.pedrogomez.pokeapp.base.BaseActivity
 import com.pedrogomez.pokeapp.pokedetail.PokemonDetailActivity
-import com.pedrogomez.pokeapp.pokelist.adapter.PokemonViewHolder
-import com.pedrogomez.pokeapp.pokelist.adapter.PokemonsAdapter
-import com.pedrogomez.pokeapp.pokelist.models.result.Result
+import com.pedrogomez.pokeapp.pokelist.listadapter.PokemonViewHolder
+import com.pedrogomez.pokeapp.pokelist.listadapter.PokemonsAdapter
+import com.pedrogomez.pokeapp.models.result.Result
 import com.pedrogomez.pokeapp.pokelist.viewmodel.PokeListViewModel
 import com.pedrogomez.pokeapp.databinding.ActivityPokemonListBinding
-import com.pedrogomez.pokeapp.pokelist.models.PokemonData
+import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.utils.PageScrollListener
 import com.pedrogomez.pokeapp.utils.extensions.print
-import com.pedrogomez.pokeapp.utils.extensions.remove
-import com.pedrogomez.pokeapp.utils.extensions.show
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PokemonsListActivity : BaseActivity(),

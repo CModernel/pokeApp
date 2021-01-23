@@ -1,4 +1,4 @@
-package com.pedrogomez.pokeapp.pokelist.models
+package com.pedrogomez.pokeapp.models
 
 enum class PokeType(val type:String) {
     NORMAL("NORMAL"),

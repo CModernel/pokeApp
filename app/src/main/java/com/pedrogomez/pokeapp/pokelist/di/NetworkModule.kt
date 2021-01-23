@@ -1,7 +1,6 @@
 package com.pedrogomez.pokeapp.pokelist.di
 
 import com.pedrogomez.pokeapp.R
-import com.pedrogomez.pokeapp.pokelist.models.adapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.pokelist.repository.PokemonsRepository
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*

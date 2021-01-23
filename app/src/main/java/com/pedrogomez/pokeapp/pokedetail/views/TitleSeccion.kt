@@ -7,6 +7,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.databinding.TitleSeccionBinding
 import com.pedrogomez.pokeapp.utils.extensions.getColor
+import com.pedrogomez.pokeapp.utils.extensions.getDrawable
+import com.pedrogomez.pokeapp.utils.getDrawableResByType
 
 /**
  * TODO: document your custom view class.
@@ -58,6 +60,14 @@ class TitleSeccion : ConstraintLayout {
 
         a.recycle()
 
+    }
+
+    fun setTitle(title:String){
+        binding.tvTitleSection.text = title
+    }
+
+    fun setBackground(bg:Int){
+        background = getDrawable(bg)
     }
 
 }

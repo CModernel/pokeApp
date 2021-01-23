@@ -1,9 +1,9 @@
-package com.pedrogomez.pokeapp.pokelist.adapter
+package com.pedrogomez.pokeapp.pokelist.listadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pedrogomez.pokeapp.pokelist.models.PokemonData
+import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.utils.extensions.print
 
 class PokemonsAdapter(

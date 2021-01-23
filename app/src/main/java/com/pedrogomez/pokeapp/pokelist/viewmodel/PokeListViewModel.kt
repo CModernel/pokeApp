@@ -2,13 +2,13 @@ package com.pedrogomez.pokeapp.pokelist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pedrogomez.pokeapp.pokelist.models.PokemonData
+import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.pokelist.repository.PokemonsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
-import com.pedrogomez.pokeapp.pokelist.models.result.Result
+import com.pedrogomez.pokeapp.models.result.Result
 
 class PokeListViewModel(
     private val pokemonsRepository: PokemonsRepository

@@ -34,44 +34,48 @@
             app:srcCompat="@drawable/ic_dummy_poke" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gdV75"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".75" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gdV87"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".87" />
-
-        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gdH33"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent=".33" />
 
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
+            android:id="@+id/tvTitleName"
+            android:layout_width="0dp"
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/ivPokemonFront"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_name"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:gravity="center_vertical"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
             android:maxLines="2"
             android:text="Pikachu"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            app:autoSizeMaxTextSize="24sp"
-            app:autoSizeMinTextSize="16sp"
+            android:textSize="20sp"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/ivPokemonFront"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
+            android:id="@+id/tvTitleHeight"
+            android:layout_width="0dp"
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_h"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvHeight"
@@ -79,16 +83,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="65"
             android:textColor="@color/black_overlay"
             app:autoSizeMaxTextSize="14sp"
             app:autoSizeMinTextSize="10sp"
             app:autoSizeStepGranularity="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleHeight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/gdV75"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
+            android:id="@+id/tvTitleWeight"
+            android:layout_width="0dp"
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/tvHeight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_w"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvWeight"
@@ -96,16 +109,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="12"
             android:textColor="@color/black_overlay"
             app:autoSizeMaxTextSize="12sp"
             app:autoSizeMinTextSize="10sp"
             app:autoSizeStepGranularity="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/tvHeight"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleWeight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/gdV75" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
+            android:id="@+id/tvTitleDesc"
+            android:layout_width="0dp"
+            style="@style/Widget.Theme.MyListAplication.TitleSeccion"
+            app:layout_constraintTop_toBottomOf="@id/tvWeight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_desc"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescription"
@@ -113,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:textSize="14sp"
             android:text="Es muy comelon"
             android:textColor="@color/black_overlay"
@@ -121,7 +143,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintTop_toBottomOf="@id/tvWeight"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDesc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -131,22 +153,24 @@
             style="@style/Widget.Theme.MyListAplication.TitleSeccion"
             app:layout_constraintTop_toBottomOf="@id/tvDescription"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tsTitle="@string/title_types"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTypes"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lyTypes"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/tvTitleTypes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tsTitle="@string/title_types" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
             android:id="@+id/tvTitleStats"
             android:layout_width="0dp"
             style="@style/Widget.Theme.MyListAplication.TitleSeccion"
-            app:layout_constraintTop_toBottomOf="@id/rvTypes"
+            app:layout_constraintTop_toBottomOf="@id/lyTypes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsTitle="@string/title_stats" />

@@ -1,12 +1,12 @@
-package com.pedrogomez.pokeapp.pokelist.models.adapters
+package com.pedrogomez.pokeapp.models.dataadapters
 
-import com.pedrogomez.pokeapp.pokelist.models.PokeStat
-import com.pedrogomez.pokeapp.pokelist.models.PokeType
-import com.pedrogomez.pokeapp.pokelist.models.PokemonData
-import com.pedrogomez.pokeapp.pokelist.models.pokedetail.PokeDetailResponse
-import com.pedrogomez.pokeapp.pokelist.models.pokedetail.Stat
-import com.pedrogomez.pokeapp.pokelist.models.pokedetail.Type
-import com.pedrogomez.pokeapp.pokelist.models.pokelist.PokeItem
+import com.pedrogomez.pokeapp.models.PokeStat
+import com.pedrogomez.pokeapp.models.PokeType
+import com.pedrogomez.pokeapp.models.PokemonData
+import com.pedrogomez.pokeapp.models.pokedetail.PokeDetailResponse
+import com.pedrogomez.pokeapp.models.pokedetail.Stat
+import com.pedrogomez.pokeapp.models.pokedetail.Type
+import com.pedrogomez.pokeapp.models.pokelist.PokeItem
 
 class PokemonDataAdapter {
 

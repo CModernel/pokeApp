@@ -1,4 +1,4 @@
-package com.pedrogomez.pokeapp.pokelist.models.result
+package com.pedrogomez.pokeapp.models.result
 
 sealed class Result{
     data class Success(val finished: Boolean):Result()
