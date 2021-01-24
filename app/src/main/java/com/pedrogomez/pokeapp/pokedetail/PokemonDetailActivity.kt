@@ -56,8 +56,10 @@ class PokemonDetailActivity : AppCompatActivity() {
                     pokemonData.id
             )
             binding.tvName.text = pokemonData.name
-            binding.tvHeight.text = "${pokemonData.height/10} m"
-            binding.tvWeight.text = "${pokemonData.weight/10} kg"
+            val height = pokemonData.height/10.0f
+            val weight = pokemonData.weight/10.0f
+            binding.tvHeight.text = "$height m"
+            binding.tvWeight.text = "$weight kg"
             binding.tvId.text = "#${pokemonData.id}"
             binding.tsfHp.setValue(pokemonData.hp?:0)
             binding.tsfAtk.setValue(pokemonData.attack?:0)

@@ -5,8 +5,8 @@ import java.io.Serializable
 data class PokemonData(
     val id:Int = 0,
     val name:String = "",
-    val height: Int = 0,
-    val weight: Int = 0,
+    val height: Float = 0f,
+    val weight: Float = 0f,
     val backDefaultImg: String = "",
     val frontDefaultImg: String = "",
     val hp: Int? = null,

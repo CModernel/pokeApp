@@ -14,8 +14,8 @@ class PokemonDataAdapter {
         return PokemonData(
             item.id?:0,
             item.name,
-            item.height?:0,
-            item.weight?:0,
+            item.height?.toFloat()?:0f,
+            item.weight?.toFloat()?:0f,
             item.sprites.back_default?:"",
             item.sprites.front_default?:"",
             getStatByTag(PokeStat.HP,item.stats),
