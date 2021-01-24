@@ -50,16 +50,18 @@ class PokeListViewModel(
     }
 
     fun findPokemon(name:String){
-        pokeFindedStateApi.postValue(
-            Result.LoadingMoreContent(true)
-        )
-        scope.launch {
+        if(name.isNotEmpty()){
             pokeFindedStateApi.postValue(
-                pokemonsRepository.getPokeDetailsByName(
-                    name,
-                    this@PokeListViewModel
-                )
+                Result.LoadingMoreContent(true)
             )
+            scope.launch {
+                pokeFindedStateApi.postValue(
+                    pokemonsRepository.getPokeDetailsByName(
+                        name,
+                        this@PokeListViewModel
+                    )
+                )
+            }
         }
     }
 

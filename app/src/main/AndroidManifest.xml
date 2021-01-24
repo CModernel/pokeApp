@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:name="com.pedrogomez.pokeapp.PokeListAplication"
         android:theme="@style/Theme.MyListAplication">
-        <activity android:name="com.pedrogomez.pokeapp.pokedetail.PokemonDetailActivity" />
-        <activity android:name="com.pedrogomez.pokeapp.pokelist.PokemonsListActivity">
+        <activity
+            android:name="com.pedrogomez.pokeapp.pokedetail.PokemonDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.pedrogomez.pokeapp.pokelist.PokemonsListActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
