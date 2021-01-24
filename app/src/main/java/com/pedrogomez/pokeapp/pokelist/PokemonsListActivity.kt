@@ -49,13 +49,9 @@ class PokemonsListActivity : BaseActivity(),
 
     private fun initListeners() {
         binding.searchBtn.setOnClickListener {
-            binding.searchBtn.isClickable = false
-            binding.searchBtn.isEnabled = false
-            hideKeyboard(it)
             pokeListViewModel.findPokemon(
                     binding.etSearchField.text.toString()
             )
-            binding.etSearchField.setText("")
         }
     }
 
@@ -120,7 +116,10 @@ class PokemonsListActivity : BaseActivity(),
                         binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
-                        Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
+                        shortToast(
+                                this,
+                                this.getString(R.string.search_error)
+                        )
                         binding.pbPokesLoading.remove()
                         binding.srlContainer.isEnabled = true
                         pageScrollListener.enablePaging(true)
@@ -134,19 +133,25 @@ class PokemonsListActivity : BaseActivity(),
                 binding.srlContainer.isRefreshing = false
                 when (it) {
                     is Result.Success -> {
+                        binding.searchBtn.isClickable = true
+                        binding.searchBtn.isEnabled = true
                         binding.pbPokesLoading.remove()
-                    }
-                    is Result.LoadingNewContent -> {
-                        binding.pbPokesLoading.show()
-                    }
-                    is Result.LoadingMoreContent -> {
-                        binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
                         binding.searchBtn.isClickable = true
                         binding.searchBtn.isEnabled = true
-                        Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
+                        shortToast(
+                                this,
+                                this.getString(R.string.search_error)
+                        )
                         binding.pbPokesLoading.remove()
+                    }
+                    else ->{
+                        binding.pbPokesLoading.show()
+                        binding.searchBtn.isClickable = false
+                        binding.searchBtn.isEnabled = false
+                        hideKeyboard(binding.etSearchField)
+                        binding.etSearchField.setText("")
                     }
                 }
             }
@@ -160,8 +165,6 @@ class PokemonsListActivity : BaseActivity(),
         pokeListViewModel.observeFindedPokemon().observe(
             this,
             Observer {
-                binding.searchBtn.isClickable = true
-                binding.searchBtn.isEnabled = true
                 if(it!=null){
                     goToBookDetail(it)
                 }else{

@@ -38,7 +38,7 @@ class PokeListViewModel(
     }
 
     fun observeFindedApiState() : MutableLiveData<Result> {
-        return pokeListStateApi
+        return pokeFindedStateApi
     }
 
     fun observePokemonData() : MutableLiveData<ArrayList<PokemonData>> {
