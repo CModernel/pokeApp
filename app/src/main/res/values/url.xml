@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="url_api">https://pokeapi.co/api/v2/pokemon</string>
+    <string name="url_api">https://pokeapi.co/api/v2</string>
 </resources>

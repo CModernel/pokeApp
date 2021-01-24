@@ -12,37 +12,60 @@ import com.pedrogomez.pokeapp.models.result.Result
 
 class PokeListViewModel(
     private val pokemonsRepository: PokemonsRepository
-    ) : ViewModel() {
+) : ViewModel(),
+    PokemonsRepository.OnFetching {
 
     val scope : CoroutineScope = CoroutineScope(
         Dispatchers.IO
     )
 
-    private val pokemonLiveData = MutableLiveData<ArrayList<PokemonData>>()
+    private val pokemonListLiveData = MutableLiveData<ArrayList<PokemonData>>()
 
-    private val pokeStateApi = MutableLiveData<Result>()
+    private val findedPokemonLiveData = MutableLiveData<PokemonData?>()
+
+    private val pokeListStateApi = MutableLiveData<Result>()
+
+    private val pokeFindedStateApi = MutableLiveData<Result>()
 
     private val pokemonList = ArrayList<PokemonData>()
 
     init {
-        pokemonLiveData.postValue(pokemonList)
+        pokemonListLiveData.postValue(pokemonList)
     }
 
     fun observeApiState() : MutableLiveData<Result> {
-        return pokeStateApi
+        return pokeListStateApi
+    }
+
+    fun observeFindedApiState() : MutableLiveData<Result> {
+        return pokeListStateApi
     }
 
     fun observePokemonData() : MutableLiveData<ArrayList<PokemonData>> {
-        return pokemonLiveData
+        return pokemonListLiveData
+    }
+
+    fun observeFindedPokemon() : MutableLiveData<PokemonData?> {
+        return findedPokemonLiveData
     }
 
     fun findPokemon(name:String){
-
+        pokeFindedStateApi.postValue(
+            Result.LoadingMoreContent(true)
+        )
+        scope.launch {
+            pokeFindedStateApi.postValue(
+                pokemonsRepository.getPokeDetailsByName(
+                    name,
+                    this@PokeListViewModel
+                )
+            )
+        }
     }
 
     fun getListOfPokemons(){
         pokemonList.clear()
-        pokeStateApi.postValue(
+        pokeListStateApi.postValue(
             Result.LoadingNewContent(true)
         )
         getPokeListByPage(0)
@@ -51,7 +74,7 @@ class PokeListViewModel(
     fun loadMorePokemonsToList(
             page:Int
     ){
-        pokeStateApi.postValue(
+        pokeListStateApi.postValue(
             Result.LoadingMoreContent(true)
         )
         getPokeListByPage(page)
@@ -59,19 +82,12 @@ class PokeListViewModel(
 
     private fun getPokeListByPage(page:Int){
         scope.launch {
-            pokeStateApi.postValue(
+            pokeListStateApi.postValue(
                 pokemonsRepository.getPokeList(
                     page,
                     //para hacer andar esto necesito eliminar el actual modo de observar la data.
                     // Debo usar un observador para los estados del app y otro para la data
-                    object : PokemonsRepository.OnFetching{
-                        override fun recibeNewState(newPoke: PokemonData) {
-                            pokemonList.add(newPoke)
-                            pokemonLiveData.postValue(
-                                    pokemonList
-                            )
-                        }
-                    }
+                    this@PokeListViewModel
                 )
             )
         }
@@ -80,6 +96,19 @@ class PokeListViewModel(
     override fun onCleared() {
         super.onCleared()
         scope.coroutineContext.cancelChildren()
+    }
+
+    override fun recibeNewState(newPoke: PokemonData) {
+        pokemonList.add(newPoke)
+        pokemonListLiveData.postValue(
+            pokemonList
+        )
+    }
+
+    override fun recibeFinded(newFindedPoke: PokemonData?) {
+        findedPokemonLiveData.postValue(
+            newFindedPoke
+        )
     }
 
 }

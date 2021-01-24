@@ -26,7 +26,32 @@ class PokemonsRepository(
         listener:OnFetching
     ):Result{
         return try{
-            val requestUrl = "$urlBase/$name"
+            val requestUrl = "$urlBase/pokemon/$name"
+            "Ktor_request getPokeDetailsByName: $requestUrl".print()
+            val response = getPokeDetailsByUrl(requestUrl)
+            listener.recibeFinded(
+                response?.let{
+                    pokeDataAdapter.getAsPokemonData(
+                        it
+                    )
+                }
+            )
+            Result.Success(true)
+        }catch (e : java.lang.Exception){
+            if (e.message.isValid()) {
+                Result.Error.RecoverableError(Exception(e.message))
+            }else{
+                Result.Error.NonRecoverableError(Exception("Un-traceable"))
+            }
+        }
+    }
+
+    suspend fun getPokeDescriptionById(
+        id : String,
+        listener:OnFetching
+    ):Result{
+        return try{
+            val requestUrl = "$urlBase/characteristic/$id"
             val response = client.request<PokeDetailResponse>(requestUrl) {
                 method = HttpMethod.Get
             }
@@ -80,7 +105,7 @@ class PokemonsRepository(
             listener:OnFetching?
     ):Result{
         return try{
-            val requestUrl ="$urlBase?limit=21&offset=${page*21}"
+            val requestUrl ="$urlBase/pokemon?limit=21&offset=${page*21}"
             "Ktor_request url: $requestUrl".print()
             val response = client.request<PokeListResponse>(requestUrl) {
                 method = HttpMethod.Get
@@ -113,6 +138,7 @@ class PokemonsRepository(
 
     interface OnFetching{
         fun recibeNewState(newPoke: PokemonData)
+        fun recibeFinded(newFindedPoke: PokemonData?)
     }
 
 }

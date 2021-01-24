@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.base.BaseActivity
 import com.pedrogomez.pokeapp.pokedetail.PokemonDetailActivity
 import com.pedrogomez.pokeapp.pokelist.listadapter.PokemonViewHolder
@@ -17,7 +18,11 @@ import com.pedrogomez.pokeapp.databinding.ActivityPokemonListBinding
 import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.utils.PageScrollListener
 import com.pedrogomez.pokeapp.utils.extensions.print
+import com.pedrogomez.pokeapp.utils.extensions.remove
+import com.pedrogomez.pokeapp.utils.extensions.shortToast
+import com.pedrogomez.pokeapp.utils.extensions.show
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.lang.Exception
 
 class PokemonsListActivity : BaseActivity(),
     PokemonViewHolder.OnClickItemListener{
@@ -49,13 +54,13 @@ class PokemonsListActivity : BaseActivity(),
             if(counter!=null){
                 counter?.cancel()
             }
-            counter = object : CountDownTimer(500, 100){
+            counter = object : CountDownTimer(1000, 100){
                 override fun onTick(millisUntilFinished: Long) {
 
                 }
                 /**
                  * Este contador se ejecuta para llamar al endpoint si y solo si el usario
-                 * dejo de teclear durante un tiempo mayor a 500ms, y asi evitar multiples
+                 * dejo de teclear durante un tiempo mayor a 1000ms, y asi evitar multiples
                  * llamadas a backend
                  * */
                 override fun onFinish() {
@@ -112,7 +117,7 @@ class PokemonsListActivity : BaseActivity(),
                 binding.srlContainer.isRefreshing = false
                 when (it) {
                     is Result.Success -> {
-                        //binding.pbPokesLoading.remove()
+                        binding.pbPokesLoading.remove()
                         binding.srlContainer.isEnabled = true
                         pageScrollListener.enablePaging(true)
                     }
@@ -121,18 +126,39 @@ class PokemonsListActivity : BaseActivity(),
                         pageScrollListener.initFields()
                         pokemonsAdapter.clearData()
                         hideKeyboard(binding.etSearchField)
-                        //binding.pbPokesLoading.show()
+                        binding.pbPokesLoading.show()
                     }
                     is Result.LoadingMoreContent -> {
                         binding.srlContainer.isEnabled = false
                         pageScrollListener.enablePaging(false)
-                        //binding.pbPokesLoading.show()
+                        binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
                         Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
-                        //binding.pbPokesLoading.remove()
+                        binding.pbPokesLoading.remove()
                         binding.srlContainer.isEnabled = true
                         pageScrollListener.enablePaging(true)
+                    }
+                }
+            }
+        )
+        pokeListViewModel.observeFindedApiState().observe(
+            this,
+            Observer {
+                binding.srlContainer.isRefreshing = false
+                when (it) {
+                    is Result.Success -> {
+                        binding.pbPokesLoading.remove()
+                    }
+                    is Result.LoadingNewContent -> {
+                        binding.pbPokesLoading.show()
+                    }
+                    is Result.LoadingMoreContent -> {
+                        binding.pbPokesLoading.show()
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
+                        binding.pbPokesLoading.remove()
                     }
                 }
             }
@@ -142,6 +168,19 @@ class PokemonsListActivity : BaseActivity(),
                 Observer {
                     pokemonsAdapter.setData(it.toList())
                 }
+        )
+        pokeListViewModel.observeFindedPokemon().observe(
+            this,
+            Observer {
+                if(it!=null){
+                    goToBookDetail(it)
+                }else{
+                    shortToast(
+                        this@PokemonsListActivity,
+                        this.getString(R.string.search_no_results)
+                    )
+                }
+            }
         )
     }
 
