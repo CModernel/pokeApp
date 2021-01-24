@@ -1,10 +1,11 @@
-# MyListAplicaction
-A simple RecyclerView test using kotlin and MVVM pattern.
+# My Poke App
+A simple Pokemon App using kotlin and MVVM pattern.
 
 - API:
-    Google's Book Api https://developers.google.com/books/
+    Pokemon Api's https://pokeapi.co/
 
 - Main Dependencies:
     Ktor,
     Koin,
-    Glide.
+    Glide,
+    Lottie
