@@ -1,9 +1,9 @@
-package com.pedrogomez.pokeapp.models.pokemonspecies
+package com.pedrogomez.pokeapp.pokedetail.models.pokemonspecies
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GrowthRate(
+data class Habitat(
     val name: String,
     val url: String
 )

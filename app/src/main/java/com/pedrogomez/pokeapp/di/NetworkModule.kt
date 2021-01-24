@@ -1,4 +1,4 @@
-package com.pedrogomez.pokeapp.pokelist.di
+package com.pedrogomez.pokeapp.di
 
 import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.pokelist.repository.PokemonsRepository

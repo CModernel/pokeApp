@@ -2,8 +2,7 @@ package com.pedrogomez.pokeapp.pokedetail.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pedrogomez.pokeapp.models.PokemonData
-import com.pedrogomez.pokeapp.models.pokemonspecies.SpeciesDetails
+import com.pedrogomez.pokeapp.pokedetail.models.pokemonspecies.SpeciesDetails
 import com.pedrogomez.pokeapp.pokelist.repository.PokemonsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

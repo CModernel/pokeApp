@@ -4,9 +4,9 @@ package com.pedrogomez.pokeapp.pokelist.repository
 import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.models.dataadapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.utils.extensions.isValid
-import com.pedrogomez.pokeapp.models.pokedetail.PokeDetailResponse
-import com.pedrogomez.pokeapp.models.pokelist.PokeListResponse
-import com.pedrogomez.pokeapp.models.pokemonspecies.SpeciesDetails
+import com.pedrogomez.pokeapp.pokelist.models.pokedetail.PokeDetailResponse
+import com.pedrogomez.pokeapp.pokelist.models.pokelist.PokeListResponse
+import com.pedrogomez.pokeapp.pokedetail.models.pokemonspecies.SpeciesDetails
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
