@@ -33,8 +33,6 @@ class PokemonsListActivity : BaseActivity(),
 
     private lateinit var pokemonsAdapter : PokemonsAdapter
 
-    private var counter : CountDownTimer? = null
-
     private lateinit var pageScrollListener : PageScrollListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,33 +41,21 @@ class PokemonsListActivity : BaseActivity(),
         setContentView(binding.root)
         initRecyclerView()
         initObservers()
-        initEditTextListeners()
+        initListeners()
         binding.btnToTop.hide()
         hideKeyboard(binding.etSearchField)
         pokeListViewModel.getListOfPokemons()
     }
 
-    private fun initEditTextListeners() {
-        binding.etSearchField.addTextChangedListener {
-            if(counter!=null){
-                counter?.cancel()
-            }
-            counter = object : CountDownTimer(1000, 100){
-                override fun onTick(millisUntilFinished: Long) {
-
-                }
-                /**
-                 * Este contador se ejecuta para llamar al endpoint si y solo si el usario
-                 * dejo de teclear durante un tiempo mayor a 1000ms, y asi evitar multiples
-                 * llamadas a backend
-                 * */
-                override fun onFinish() {
-                    pokeListViewModel.findPokemon(
-                        it.toString()
-                    )
-                }
-
-            }.start()
+    private fun initListeners() {
+        binding.searchBtn.setOnClickListener {
+            binding.searchBtn.isClickable = false
+            binding.searchBtn.isEnabled = false
+            hideKeyboard(it)
+            pokeListViewModel.findPokemon(
+                    binding.etSearchField.text.toString()
+            )
+            binding.etSearchField.setText("")
         }
     }
 
@@ -157,6 +143,8 @@ class PokemonsListActivity : BaseActivity(),
                         binding.pbPokesLoading.show()
                     }
                     is Result.Error -> {
+                        binding.searchBtn.isClickable = true
+                        binding.searchBtn.isEnabled = true
                         Toast.makeText(this, "Hubo un error", Toast.LENGTH_SHORT).show()
                         binding.pbPokesLoading.remove()
                     }
@@ -172,6 +160,8 @@ class PokemonsListActivity : BaseActivity(),
         pokeListViewModel.observeFindedPokemon().observe(
             this,
             Observer {
+                binding.searchBtn.isClickable = true
+                binding.searchBtn.isEnabled = true
                 if(it!=null){
                     goToBookDetail(it)
                 }else{

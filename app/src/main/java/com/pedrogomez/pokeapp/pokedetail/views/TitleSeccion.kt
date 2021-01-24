@@ -37,8 +37,7 @@ class TitleSeccion : ConstraintLayout {
 
         binding = TitleSeccionBinding.inflate(
             LayoutInflater.from(context),
-            this,
-            true
+            this
         )
 
         val a = context.obtainStyledAttributes(

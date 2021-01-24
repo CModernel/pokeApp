@@ -15,5 +15,10 @@
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
     <color name="title_bg">#A3DBF6</color>
-    <color name="title_bg_ng">#FFBDBDBD</color>
+    <color name="blue_gray_l1">#78909c</color>
+    <color name="blue_gray_d1">#546e7a</color>
+    <color name="blue_gray_d3">#37474f</color>
+    <color name="blue_light_l5">#e1f5fe</color>
+    <color name="blue_light_l3">#81d4fa</color>
+    <color name="blue_light_l1">#29b6f6</color>
 </resources>

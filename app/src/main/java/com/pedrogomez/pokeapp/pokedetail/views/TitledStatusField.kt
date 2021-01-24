@@ -27,8 +27,7 @@ class TitledStatusField : ConstraintLayout {
     private fun init(attrs: AttributeSet?, defStyle: Int) {
         binding = TitledStatusFieldBinding.inflate(
             LayoutInflater.from(context),
-            this,
-            true
+            this
         )
         val a = context.obtainStyledAttributes(
                 attrs,

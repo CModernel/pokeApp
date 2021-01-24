@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Poke App</string>
-    <string name="search_hint">escriba el nombre del pokemon a buscar</string>
+    <string name="search_hint">Escriba el id o nombre del pokemon</string>
     <string name="search_no_results">Pokemon no encontrado</string>
     <string name="stat_hp">HP</string>
     <string name="stat_atk">ATK</string>
