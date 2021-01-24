@@ -5,19 +5,28 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.size
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.databinding.ActivityPokemonDetailBinding
 import com.pedrogomez.pokeapp.models.PokeType
-import com.pedrogomez.pokeapp.pokedetail.typesadapter.TypesHelper
+import com.pedrogomez.pokeapp.models.result.Result
+import com.pedrogomez.pokeapp.pokedetail.typeshelper.TypesHelper
+import com.pedrogomez.pokeapp.pokedetail.viewmodel.PokeDetailsViewModel
 import com.pedrogomez.pokeapp.utils.extensions.print
+import com.pedrogomez.pokeapp.utils.extensions.remove
+import com.pedrogomez.pokeapp.utils.extensions.shortToast
+import com.pedrogomez.pokeapp.utils.extensions.show
 import com.pedrogomez.pokeapp.utils.getDrawableResByType
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class PokemonDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPokemonDetailBinding
+
+    private val pokeDetailsViewModel : PokeDetailsViewModel by viewModel()
 
     companion object {
         const val POKE_DATA = "pokeData"
@@ -43,9 +52,12 @@ class PokemonDetailActivity : AppCompatActivity() {
                     ).into(
                             binding?.ivPokemonBack!!
                     )
+            pokeDetailsViewModel.getSpeciesDetails(
+                    pokemonData.id
+            )
             binding.tvName.text = pokemonData.name
-            binding.tvHeight.text = "${pokemonData.height} m"
-            binding.tvWeight.text = "${pokemonData.weight} kg"
+            binding.tvHeight.text = "${pokemonData.height/10} m"
+            binding.tvWeight.text = "${pokemonData.weight/10} kg"
             binding.tvId.text = "#${pokemonData.id}"
             binding.tsfHp.setValue(pokemonData.hp?:0)
             binding.tsfAtk.setValue(pokemonData.attack?:0)
@@ -58,6 +70,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         }catch (e: Exception){
             "bookData: error".print()
         }
+        initObservers()
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
@@ -84,6 +97,17 @@ class PokemonDetailActivity : AppCompatActivity() {
         binding.tvTitleTypes.setBackground(bg)
         binding.tvTitleStats.setBackground(bg)
         binding.tvTitleWeight.setBackground(bg)
+    }
+
+    private fun initObservers() {
+        pokeDetailsViewModel.observeSpeciesDetaiData().observe(
+                this,
+                Observer {
+                    it?.let {
+                        binding.tvDescription.text = it.flavor_text_entries[0].flavor_text
+                    }
+                }
+        )
     }
 
     private fun openOnBrowser(url:String){

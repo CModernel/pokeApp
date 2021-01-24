@@ -1,8 +1,11 @@
 package com.pedrogomez.pokeapp.pokelist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.AttributeSet
+import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -43,7 +46,6 @@ class PokemonsListActivity : BaseActivity(),
         initObservers()
         initListeners()
         binding.btnToTop.hide()
-        hideKeyboard(binding.etSearchField)
         pokeListViewModel.getListOfPokemons()
     }
 

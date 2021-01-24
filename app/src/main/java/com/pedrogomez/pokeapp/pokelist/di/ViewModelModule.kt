@@ -4,6 +4,6 @@ import com.pedrogomez.pokeapp.pokelist.viewmodel.PokeListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
+val viewModelListModule = module {
     viewModel { PokeListViewModel(get()) }
 }

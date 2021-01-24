@@ -1,4 +1,4 @@
-package com.pedrogomez.pokeapp.pokedetail.typesadapter
+package com.pedrogomez.pokeapp.pokedetail.typeshelper
 
 import android.content.Context
 import android.util.DisplayMetrics

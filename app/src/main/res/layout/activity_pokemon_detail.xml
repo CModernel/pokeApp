@@ -137,7 +137,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
             android:textSize="14sp"
-            android:text="Es muy comelon"
+            android:text="@string/dummy_desc"
             android:textColor="@color/black_overlay"
             app:autoSizeMaxTextSize="15sp"
             app:autoSizeMinTextSize="12sp"

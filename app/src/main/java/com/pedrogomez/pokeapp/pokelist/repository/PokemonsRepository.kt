@@ -6,6 +6,7 @@ import com.pedrogomez.pokeapp.models.dataadapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.utils.extensions.isValid
 import com.pedrogomez.pokeapp.models.pokedetail.PokeDetailResponse
 import com.pedrogomez.pokeapp.models.pokelist.PokeListResponse
+import com.pedrogomez.pokeapp.models.pokemonspecies.SpeciesDetails
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -47,28 +48,17 @@ class PokemonsRepository(
     }
 
     suspend fun getPokeDescriptionById(
-        id : String,
-        listener:OnFetching
-    ):Result{
+        id : String
+    ):SpeciesDetails?{
         return try{
-            val requestUrl = "$urlBase/characteristic/$id"
-            val response = client.request<PokeDetailResponse>(requestUrl) {
+            val requestUrl = "$urlBase/pokemon-species/$id"
+            "Ktor_request getPokeDetailsByName: $requestUrl".print()
+            val response = client.request<SpeciesDetails>(requestUrl) {
                 method = HttpMethod.Get
             }
-            val pokeListData = ArrayList<PokemonData>()
-            pokeListData.add(
-                pokeDataAdapter.getAsPokemonData(
-                    response
-                )
-            )
-            "Ktor_request getPokeDetailsByName: $response".print()
-            Result.Success(true)
+            response
         }catch (e : java.lang.Exception){
-            if (e.message.isValid()) {
-                Result.Error.RecoverableError(Exception(e.message))
-            }else{
-                Result.Error.NonRecoverableError(Exception("Un-traceable"))
-            }
+            null
         }
     }
 
