@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">My Poke App</string>
-    <string name="search_hint">Escriba el id o nombre del pokemon</string>
-    <string name="search_no_results">Pokemon no encontrado</string>
-    <string name="search_error">Hubo un error. Revise su conexion a internet</string>
-    <string name="stat_hp">HP</string>
-    <string name="stat_atk">ATK</string>
-    <string name="stat_def">DEF</string>
-    <string name="stat_spd">SPD</string>
-    <string name="stat_sp_atk">SpATK</string>
-    <string name="stat_sp_def">SpDEF</string>
-    <string name="title_stats">Stats</string>
-    <string name="title_types">Tipos</string>
-    <string name="title_desc">Descripcion</string>
-    <string name="title_name">Nombre</string>
-    <string name="title_h">Altura</string>
-    <string name="title_w">Peso</string>
+    <string name = "search_hint"> Enter the id or name of the pokemon </string>
+    <string name = "search_no_results"> Pokemon not found </string>
+    <string name = "search_error"> There was an error. Check your internet connection </string>
+    <string name = "stat_hp"> HP </string>
+    <string name = "stat_atk"> ATK </string>
+    <string name = "stat_def"> DEF </string>
+    <string name = "stat_spd"> SPD </string>
+    <string name = "stat_sp_atk"> SpATK </string>
+    <string name = "stat_sp_def"> SpDEF </string>
+    <string name = "title_stats"> Stats </string>
+    <string name = "title_types"> Types </string>
+    <string name = "title_desc"> Description </string>
+    <string name = "title_name"> Name </string>
+    <string name = "title_h"> Height </string>
+    <string name = "title_w"> Weight </string>
     <string name="dummy_desc">--- --- -- ----- --- -- -</string>
 </resources>
