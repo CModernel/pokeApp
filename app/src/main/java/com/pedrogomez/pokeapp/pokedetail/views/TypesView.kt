@@ -1,18 +1,53 @@
-package com.pedrogomez.pokeapp.pokedetail.typeshelper
+package com.pedrogomez.pokeapp.pokedetail.views
 
 import android.content.Context
+import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.view.LayoutInflater
 import android.widget.LinearLayout
+import com.pedrogomez.pokeapp.R
+import com.pedrogomez.pokeapp.databinding.ViewTypesBinding
 import com.pedrogomez.pokeapp.models.PokeType
-import com.pedrogomez.pokeapp.pokedetail.views.TitleSeccion
 import com.pedrogomez.pokeapp.utils.extensions.print
 import com.pedrogomez.pokeapp.utils.getDrawableResByType
 
-class TypesHelper(){
+class TypesView : LinearLayout {
+
+    lateinit var binding : ViewTypesBinding
+
+    constructor(context: Context) : super(context) {
+        init(null, 0)
+    }
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init(attrs, 0)
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+        init(attrs, defStyle)
+    }
 
     private val listTypes = ArrayList<TitleSeccion>()
 
-    fun inflateTypes(pokeTypes: List<PokeType>, context: Context): List<TitleSeccion>{
+    private fun init(attrs: AttributeSet?, defStyle: Int) {
+        binding = ViewTypesBinding.inflate(
+            LayoutInflater.from(context),
+            this
+        )
+        val a = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.TypesView,
+            defStyle,
+            0
+        )
+
+        a.recycle()
+
+    }
+
+    fun setTypes(
+        pokeTypes: List<PokeType>
+    ){
         "hay ${pokeTypes.size} tipos".print()
         val widthItem = getWidthDisplay(context)/pokeTypes.size
         pokeTypes.map {
@@ -36,7 +71,11 @@ class TypesHelper(){
             }
             listTypes.add(titleSeccion)
         }
-        return listTypes.toList()
+        listTypes.map {
+            binding.lyTypes.addView(
+                it
+            )
+        }
     }
 
     fun getWidthDisplay(context: Context): Int {

@@ -156,12 +156,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tsTitle="@string/title_types"/>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/lyTypes"
+        <com.pedrogomez.pokeapp.pokedetail.views.TypesView
+            android:id="@+id/typesView"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/tvTitleTypes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -170,7 +168,7 @@
             android:id="@+id/tvTitleStats"
             android:layout_width="0dp"
             style="@style/Widget.Theme.MyListAplication.TitleSeccion"
-            app:layout_constraintTop_toBottomOf="@id/lyTypes"
+            app:layout_constraintTop_toBottomOf="@id/typesView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tsTitle="@string/title_stats" />

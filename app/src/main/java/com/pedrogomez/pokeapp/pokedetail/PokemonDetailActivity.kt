@@ -12,7 +12,6 @@ import com.pedrogomez.pokeapp.models.PokemonData
 import com.pedrogomez.pokeapp.databinding.ActivityPokemonDetailBinding
 import com.pedrogomez.pokeapp.models.PokeType
 import com.pedrogomez.pokeapp.models.result.Result
-import com.pedrogomez.pokeapp.pokedetail.typeshelper.TypesHelper
 import com.pedrogomez.pokeapp.pokedetail.viewmodel.PokeDetailsViewModel
 import com.pedrogomez.pokeapp.utils.extensions.print
 import com.pedrogomez.pokeapp.utils.extensions.remove
@@ -79,13 +78,10 @@ class PokemonDetailActivity : AppCompatActivity() {
     }
 
     private fun initTypes() {
-        pokemonData.type?.let { list ->
-            TypesHelper().inflateTypes(list,this@PokemonDetailActivity).map {
-                "hay ${it.size} tipos".print()
-                binding.lyTypes.addView(
-                    it
-                )
-            }
+        pokemonData.type?.let {
+            binding.typesView.setTypes(
+                it
+            )
         }
     }
 
