@@ -5,5 +5,10 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelListModule = module {
-    viewModel { PokeListViewModel(get()) }
+    viewModel {
+        PokeListViewModel(
+            get(),
+            get()
+        )
+    }
 }

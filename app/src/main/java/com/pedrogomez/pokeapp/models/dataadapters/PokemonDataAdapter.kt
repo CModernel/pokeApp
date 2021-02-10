@@ -10,21 +10,35 @@ import com.pedrogomez.pokeapp.pokelist.models.pokelist.PokeItem
 
 class PokemonDataAdapter {
 
-    fun getAsPokemonData(item: PokeDetailResponse): PokemonData {
+    fun getAsPokemonData(item: PokeItem): PokemonData {
         return PokemonData(
             item.id?:0,
             item.name,
             item.height?.toFloat()?:0f,
             item.weight?.toFloat()?:0f,
-            item.sprites.back_default?:"",
-            item.sprites.front_default?:"",
-            getStatByTag(PokeStat.HP,item.stats),
-            getStatByTag(PokeStat.ATTACK,item.stats),
-            getStatByTag(PokeStat.DEFENSE,item.stats),
-            getStatByTag(PokeStat.SPECIAL_ATTACK,item.stats),
-            getStatByTag(PokeStat.SPECIAL_DEFENSE,item.stats),
-            getStatByTag(PokeStat.SPEED,item.stats),
-            getAsPokeTypeList(item.types)
+            item.sprites?.back_default?:"",
+            item.sprites?.front_default?:"",
+            item.stats?.let {
+                getStatByTag(PokeStat.HP,it)
+            },
+            item.stats?.let {
+                getStatByTag(PokeStat.ATTACK,it)
+            },
+            item.stats?.let {
+                getStatByTag(PokeStat.DEFENSE,it)
+            },
+            item.stats?.let {
+                getStatByTag(PokeStat.SPECIAL_ATTACK,it)
+            },
+            item.stats?.let {
+                getStatByTag(PokeStat.SPECIAL_DEFENSE,it)
+            },
+            item.stats?.let {
+                getStatByTag(PokeStat.SPEED,it)
+            },
+            item.types?.let{
+                getAsPokeTypeList(it)
+            }
         )
     }
 
@@ -32,7 +46,7 @@ class PokemonDataAdapter {
         val pokemonDataList = ArrayList<PokemonData>()
         pokeList.map {
             pokemonDataList.add(
-                it.pokeDetail?.let { it1 -> getAsPokemonData(it1) }?: PokemonData()
+                it?.let { it1 -> getAsPokemonData(it1) }?: PokemonData()
             )
         }
         return pokemonDataList.toList()

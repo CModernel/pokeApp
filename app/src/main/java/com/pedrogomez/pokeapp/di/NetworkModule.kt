@@ -14,8 +14,7 @@ val networkModule = module {
     single {
         PokemonsRepository(
             get(),
-            androidApplication().getString(R.string.url_api),
-            get()
+            androidApplication().getString(R.string.url_api)
         )
     }
 }

@@ -3,6 +3,7 @@ package com.pedrogomez.pokeapp.pokelist.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pedrogomez.pokeapp.models.PokemonData
+import com.pedrogomez.pokeapp.models.dataadapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.pokelist.repository.PokemonsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,15 +12,15 @@ import kotlinx.coroutines.launch
 import com.pedrogomez.pokeapp.models.result.Result
 
 class PokeListViewModel(
-    private val pokemonsRepository: PokemonsRepository
-) : ViewModel(),
-    PokemonsRepository.OnFetching {
+    private val pokemonsRepository: PokemonsRepository,
+    private val pokeDataAdapter : PokemonDataAdapter
+) : ViewModel(){
 
     val scope : CoroutineScope = CoroutineScope(
         Dispatchers.IO
     )
 
-    private val pokemonListLiveData = MutableLiveData<ArrayList<PokemonData>>()
+    private val pokemonListLiveData = MutableLiveData<MutableList<PokemonData>>()
 
     private val findedPokemonLiveData = MutableLiveData<PokemonData?>()
 
@@ -41,7 +42,7 @@ class PokeListViewModel(
         return pokeFindedStateApi
     }
 
-    fun observePokemonData() : MutableLiveData<ArrayList<PokemonData>> {
+    fun observePokemonData() : MutableLiveData<MutableList<PokemonData>> {
         return pokemonListLiveData
     }
 
@@ -55,11 +56,20 @@ class PokeListViewModel(
                 Result.LoadingMoreContent(true)
             )
             scope.launch {
+                val findedPokemon = pokemonsRepository.getPokeDetailsByName(
+                        name
+                )
                 pokeFindedStateApi.postValue(
-                    pokemonsRepository.getPokeDetailsByName(
-                        name,
-                        this@PokeListViewModel
-                    )
+                        if(findedPokemon!=null){
+                            Result.Success(true)
+                        }else{
+                            Result.Error.RecoverableError("Check your internet connexion")
+                        }
+                )
+                findedPokemonLiveData.postValue(
+                        findedPokemon?.let {
+                            pokeDataAdapter.getAsPokemonData(it)
+                        }
                 )
             }
         }
@@ -84,33 +94,30 @@ class PokeListViewModel(
 
     private fun getPokeListByPage(page:Int){
         scope.launch {
-            pokeListStateApi.postValue(
-                pokemonsRepository.getPokeList(
-                    page,
-                    //para hacer andar esto necesito eliminar el actual modo de observar la data.
-                    // Debo usar un observador para los estados del app y otro para la data
-                    this@PokeListViewModel
-                )
+            val pokemonsList = pokemonsRepository.getPokeList(
+                    page
             )
+            pokemonListLiveData.postValue(
+                pokeDataAdapter.getAsPokemonDataList(
+                        pokemonsList
+                ).toMutableList()
+            )
+            pokeListStateApi.postValue(
+                    if(pokemonsList.isNotEmpty()){
+                        Result.Success(true)
+                    }else{
+                        Result.Error.RecoverableError("Check your internet connexion")
+                    }
+            )
+            if(pokemonsList.isNotEmpty()){
+
+            }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
         scope.coroutineContext.cancelChildren()
-    }
-
-    override fun recibeNewState(newPoke: PokemonData) {
-        pokemonList.add(newPoke)
-        pokemonListLiveData.postValue(
-            pokemonList
-        )
-    }
-
-    override fun recibeFinded(newFindedPoke: PokemonData?) {
-        findedPokemonLiveData.postValue(
-            newFindedPoke
-        )
     }
 
 }
