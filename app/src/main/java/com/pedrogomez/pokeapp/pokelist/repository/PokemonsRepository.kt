@@ -43,7 +43,7 @@ class PokemonsRepository(
     /**
      * @param requestUrl {url used to get pokemon's specific data}
      */
-    private suspend fun getPokeDetailsByUrl(
+    suspend fun getPokeDetailsByUrl(
             requestUrl:String
     ):PokeItem?{
         return try{

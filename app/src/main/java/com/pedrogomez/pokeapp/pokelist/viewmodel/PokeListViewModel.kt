@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import com.pedrogomez.pokeapp.models.result.Result
+import com.pedrogomez.pokeapp.utils.extensions.print
 
 class PokeListViewModel(
     private val pokemonsRepository: PokemonsRepository,
@@ -109,8 +110,18 @@ class PokeListViewModel(
                         Result.Error.RecoverableError("Check your internet connexion")
                     }
             )
-            if(pokemonsList.isNotEmpty()){
-
+            val fullPokeDataList = pokemonsList.map {
+                pokemonsRepository.getPokeDetailsByUrl(
+                        it.url
+                )
+            }
+            "Lista de pokemons n : ${fullPokeDataList.size} = $fullPokeDataList".print()
+            fullPokeDataList.let {
+                pokemonListLiveData.postValue(
+                        pokeDataAdapter.getAsPokemonDataList(
+                                it
+                        ).toMutableList()
+                )
             }
         }
     }

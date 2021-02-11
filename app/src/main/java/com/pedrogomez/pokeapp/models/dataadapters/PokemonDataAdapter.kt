@@ -7,10 +7,12 @@ import com.pedrogomez.pokeapp.pokelist.models.pokedetail.PokeDetailResponse
 import com.pedrogomez.pokeapp.pokelist.models.pokedetail.Stat
 import com.pedrogomez.pokeapp.pokelist.models.pokedetail.Type
 import com.pedrogomez.pokeapp.pokelist.models.pokelist.PokeItem
+import com.pedrogomez.pokeapp.utils.extensions.print
 
 class PokemonDataAdapter {
 
     fun getAsPokemonData(item: PokeItem): PokemonData {
+        "Convierto : ${item.name}".print()
         return PokemonData(
             item.id?:0,
             item.name,
@@ -42,7 +44,7 @@ class PokemonDataAdapter {
         )
     }
 
-    fun getAsPokemonDataList(pokeList:List<PokeItem>):List<PokemonData>{
+    fun getAsPokemonDataList(pokeList:List<PokeItem?>):List<PokemonData>{
         val pokemonDataList = ArrayList<PokemonData>()
         pokeList.map {
             pokemonDataList.add(
