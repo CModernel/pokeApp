@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Poke App</string>
+    <string name="app_name">PokemonTrainer</string>
     <string name="search_hint"> Enter the id or name of the pokemon </string>
     <string name="search_no_results"> Pokemon not found </string>
     <string name="search_error"> There was an error. Check your internet connection </string>
@@ -16,4 +16,13 @@
     <string name="title_h"> Height </string>
     <string name="title_w"> Weight </string>
     <string name="dummy_desc">--- --- -- ----- --- -- -</string>
+
+
+    <!-- Main Menu -->
+    <string name="pokedex_text">Pokedex</string>
+    <string name="quiz_text">Quiz</string>
+    <string name="quit_text">Quit</string>
+
+    <!-- Pokedex -->
+    <string name="back">Back</string>
 </resources>
