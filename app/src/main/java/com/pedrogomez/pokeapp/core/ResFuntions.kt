@@ -1,9 +1,7 @@
 package com.pedrogomez.pokeapp.core
 
-
-import com.cmodernel004.pokemontrainer.R
+import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.pokedex.models.PokeType
-
 
 fun getDrawableResByType(type: PokeType?):Int {
     return when (type) {

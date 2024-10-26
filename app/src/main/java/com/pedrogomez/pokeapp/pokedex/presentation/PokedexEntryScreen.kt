@@ -27,7 +27,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import com.pedrogomez.pokeapp.core.ui.common.LoadingIndicator
 import com.pedrogomez.pokeapp.pokedex.models.PokemonData
@@ -36,26 +35,19 @@ import org.koin.androidx.compose.koinViewModel
 import coil3.compose.AsyncImage
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.capitalize
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.cmodernel004.pokemontrainer.R
+import com.pedrogomez.pokeapp.R
 import java.util.Locale
-import java.util.UUID
 
 @Composable
 fun PokedexEntryScreen(

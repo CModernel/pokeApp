@@ -1,6 +1,6 @@
 package com.pedrogomez.pokeapp.core.di
 
-import com.cmodernel004.pokemontrainer.R
+import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.pokedex.models.dataadapters.PokemonDataAdapter
 import com.pedrogomez.pokeapp.pokedex.presentation.PokeListViewModel
 import io.ktor.client.HttpClient
