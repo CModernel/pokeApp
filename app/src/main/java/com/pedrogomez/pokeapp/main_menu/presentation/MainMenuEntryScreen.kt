@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cmodernel004.pokemontrainer.R
+import com.pedrogomez.pokeapp.R
 import com.pedrogomez.pokeapp.core.navigation.ScreenRoute
 import com.pedrogomez.pokeapp.main_menu.presentation.components.ListRow
 import com.pedrogomez.pokeapp.main_menu.presentation.components.ListRowIcon

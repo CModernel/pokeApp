@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cmodernel004.pokemontrainer"
+    namespace = "com.pedrogomez.pokeapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.cmodernel004.pokemontrainer"
+        applicationId = "com.pedrogomez.pokeapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
