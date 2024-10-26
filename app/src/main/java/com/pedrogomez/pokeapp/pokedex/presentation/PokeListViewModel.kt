@@ -94,9 +94,8 @@ class PokeListViewModel(
 
     private val accumulatedPokemonData = mutableListOf<PokemonData>()
 
-
-    private var currentPage = 0 // Variable para llevar el control de la página actual
-    private var isLoading = false // Para evitar múltiples solicitudes simultáneas
+    private var currentPage = 0
+    private var isLoading = false
 
     fun loadInitialPokemonList() {
         currentPage = 0
@@ -104,8 +103,10 @@ class PokeListViewModel(
     }
 
     fun loadNextPage(reset: Boolean = false) {
-        if (isLoading) return // Evitar solicitudes duplicadas mientras ya se está cargando
+        if (isLoading) return
         isLoading = true
+
+        pokeListStateApi.postValue(PokeApiResult.LoadingMoreContent(true))
 
         viewModelScope.launch {
             try {
@@ -116,13 +117,13 @@ class PokeListViewModel(
                     val currentList = pokemonListLiveData.value.orEmpty().toMutableList()
                     val newItems = pokeDataAdapter.getAsPokemonDataList(pokemonsList)
                     if (reset) {
-                        currentList.clear() // Limpiar la lista en caso de reinicio
+                        currentList.clear()
                     }
                     currentList.addAll(newItems)
                     pokemonListLiveData.postValue(currentList)
 
-                    pokeListStateApi.postValue(PokeApiResult.Success(true))
-                    currentPage++ // Incrementar el número de página solo cuando hay nuevos datos
+                    pokeListStateApi.postValue(PokeApiResult.Success(finished = true))
+                    currentPage++
                 } else {
                     pokeListStateApi.postValue(PokeApiResult.Error.RecoverableError("No more data available"))
                 }
@@ -130,6 +131,7 @@ class PokeListViewModel(
                 pokeListStateApi.postValue(PokeApiResult.Error.RecoverableError("Check your internet connection"))
             } finally {
                 isLoading = false
+                pokeListStateApi.postValue(PokeApiResult.LoadingMoreContent(false))
             }
         }
     }
@@ -138,13 +140,10 @@ class PokeListViewModel(
         scope.launch {
             val pokemonsList = pokemonsRepository.getPokeList(page)
 
-            // Convert new items to PokemonData list
             val newPokemonDataList = pokeDataAdapter.getAsPokemonDataList(pokemonsList)
 
-            // Add new items to the accumulated list
             accumulatedPokemonData.addAll(newPokemonDataList)
 
-            // Update LiveData with the expanded list
             pokemonListLiveData.postValue(accumulatedPokemonData.toList().toMutableList())
 
             pokeListStateApi.postValue(
@@ -160,7 +159,6 @@ class PokeListViewModel(
             }
             "Lista de pokemons n : ${fullPokeDataList.size} = $fullPokeDataList".print()
 
-            // Append detailed data to accumulated list and update LiveData again if needed
             fullPokeDataList.let {
                 accumulatedPokemonData.addAll(
                     pokeDataAdapter.getAsPokemonDataList(it)

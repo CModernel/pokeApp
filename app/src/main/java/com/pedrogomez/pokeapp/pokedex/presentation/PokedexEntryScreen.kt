@@ -1,6 +1,7 @@
 package com.pedrogomez.pokeapp.pokedex.presentation
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -38,8 +40,10 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -65,14 +69,19 @@ fun PokedexEntryScreen(
         .observeAsState(PokeApiResult.LoadingNewContent(false))
 
     Surface(modifier = modifier) {
-        PokemonList(
-            pokemonList = pokemonList,
-            apiState = apiState,
-            onPokemonClick = onPokemonClick,
-            fetchPokemonData = { viewModel.loadInitialPokemonList() },
-            fetchNextPage = { viewModel.loadNextPage() }, // Para cargar más datos
-            onBackPressed = onBackPressed,
-        )
+        Box(modifier = Modifier.fillMaxSize()) {
+            PokemonList(
+                pokemonList = pokemonList,
+                apiState = apiState,
+                onPokemonClick = onPokemonClick,
+                fetchPokemonData = { viewModel.loadInitialPokemonList() },
+                fetchNextPage = { viewModel.loadNextPage() },
+                onBackPressed = onBackPressed,
+            )
+            LoadingOverlay(
+                isVisible = (apiState as? PokeApiResult.LoadingMoreContent)?.status ?: false,
+            )
+        }
     }
 }
 
@@ -83,7 +92,7 @@ fun PokemonList(
     apiState: PokeApiResult,
     onPokemonClick: (PokemonData) -> Unit,
     fetchPokemonData: () -> Unit,
-    fetchNextPage: () -> Unit, // Nueva función para cargar más datos
+    fetchNextPage: () -> Unit,
     onBackPressed: () -> Unit
 ) {
     val listState = rememberLazyGridState()
@@ -105,7 +114,7 @@ fun PokemonList(
     ) { padding ->
         if (apiState is PokeApiResult.LoadingNewContent && pokemonList.isEmpty()) {
             LoadingIndicator(enabled = true)
-            LaunchedEffect(Unit) { fetchPokemonData() } // Cargar la página inicial
+            LaunchedEffect(Unit) { fetchPokemonData() }
         } else {
             LoadingIndicator(enabled = false)
             LazyVerticalGrid(
@@ -119,11 +128,37 @@ fun PokemonList(
                 items(pokemonList) { pokemon ->
                     PokemonItem(pokemon = pokemon) { onPokemonClick(pokemon) }
                 }
+                if (apiState is PokeApiResult.LoadingNewContent) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                }
             }
 
             if (listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == pokemonList.size - 1) {
                 LaunchedEffect(Unit) { fetchNextPage() }
             }
+        }
+    }
+}
+
+@Composable
+fun LoadingOverlay(isVisible: Boolean) {
+    if (isVisible) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.1f)),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator(color = Color.Gray)
         }
     }
 }
